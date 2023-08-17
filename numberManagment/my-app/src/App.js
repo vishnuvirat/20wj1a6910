@@ -22,22 +22,23 @@ function App() {
     return Array.from(new Set(array));
   };
 
-  const fetchAllData = async () => {
-    const urls = [
-      "http://20.244.56.144/numbers/primes",
-      "http://20.244.56.144/numbers/fibo",
-      "http://20.244.56.144/numbers/odd",
-      "http://20.244.56.144/numbers/rand",
-    ];
-
-    const fetchPromises = urls.map((url) => fetchDataAndAddToArray(url));
-    await Promise.all(fetchPromises);
-
-    const uniqueNumbersArray = removeDuplicates(uniqueNumbers);
-    setUniqueNumbers(uniqueNumbersArray);
-  };
-
   useEffect(() => {
+    const fetchAllData = async () => {
+      const urls = [
+        "http://20.244.56.144/numbers/primes",
+        "http://20.244.56.144/numbers/fibo",
+        "http://20.244.56.144/numbers/odd",
+        "http://20.244.56.144/numbers/rand",
+      ];
+
+      const fetchPromises = urls.map((url) => fetchDataAndAddToArray(url));
+      await Promise.all(fetchPromises);
+
+      const uniqueNumbersArray = removeDuplicates(uniqueNumbers);
+      setUniqueNumbers(uniqueNumbersArray);
+      console.log(uniqueNumbersArray);
+    };
+
     fetchAllData();
   }, []); // Empty dependency array to run only on mount
 
